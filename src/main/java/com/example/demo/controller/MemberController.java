@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.dto.MemberDTO;
@@ -29,6 +30,18 @@ public class MemberController {
 		List<MemberDTO> list=memberService.findMemberList();
 		Map<String,Object> map=new HashMap<>();
 		map.put("list", list);
+		return map;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/member/detail")
+	public Map<String,Object> memberList(
+			@RequestParam  String id
+			) {
+		log.info("========================== MemberController(/member/detail) ==================================");
+		MemberDTO member=memberService.findMemberDetail(id);
+		Map<String,Object> map=new HashMap<>();
+		map.put("member", member);
 		return map;
 	}
 	
